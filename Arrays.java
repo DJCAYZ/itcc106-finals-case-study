@@ -33,7 +33,7 @@ public class Arrays {
             System.out.println(" C/c \t   Display the numbers in the odd indexes");
             System.out.println(" D/d \t   Display the numbers in ascending order");
             System.out.println(" E/e \t   Display the numbers in descending order");
-            System.out.println(" Q/q \t   Exit the program");
+            System.out.println(" Q/q \t   Exit the program.");
 
             System.out.print("\nEnter a choice: ");
             char choice;
@@ -111,7 +111,7 @@ public class Arrays {
 
     public static void displayInDescendingOrder(int[] nums) {
         int[] sortedNums = sortAscending(nums);
-        reverse(sortedNums);
+        sortedNums = reverse(sortedNums);
         displayElements(sortedNums);
     }
 
@@ -121,11 +121,8 @@ public class Arrays {
         int numsSize = numsCopy.length;
 
         for (int i = 0; i < numsSize; i++) {
-            // System.out.printf("[i] %d%n", i);
             for (int j = 0; j < numsSize - i - 1; j++) {
-                // System.out.printf("[j] %d%n", j);
                 if (numsCopy[j] > numsCopy[j + 1]) {
-                    // System.out.printf("%d <-> %d%n", nums[j], nums[j+1]);
                     int temp = numsCopy[j];
                     numsCopy[j] = numsCopy[j + 1];
                     numsCopy[j + 1] = temp;
@@ -136,15 +133,13 @@ public class Arrays {
         return numsCopy;
     }
 
-    public static void reverse(int[] nums) {
-        int[] tempArray = new int[nums.length];
+    public static int[] reverse(int[] nums) {
+        int[] newArray = new int[nums.length];
 
         for(int i = 0; i < nums.length; i++) {
-            tempArray[nums.length - i - 1] = nums[i];
+            newArray[nums.length - i - 1] = nums[i];
         }
 
-        for(int i = 0; i < tempArray.length; i++) {
-            nums[i] = tempArray[i];
-        }
+        return newArray;
     }
 }

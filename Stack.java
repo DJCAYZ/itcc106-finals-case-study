@@ -68,8 +68,8 @@ public class Stack {
                 case 'q':
                     running = false;
          		                    
-                    	System.out.println("\n________________________________________________\n");
-                    	System.out.println("\nThank you for using our program\n");
+                    System.out.println("\n________________________________________________\n");
+                    System.out.println("\nThank you for using our program\n");
                     	
                     break;
 
