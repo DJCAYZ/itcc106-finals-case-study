@@ -2,8 +2,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-// ! OUTDATED, Please grab edited version
-
 public class Queue {
 
     private static BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
@@ -26,6 +24,7 @@ public class Queue {
             System.out.println(" E/e\t   Enqueue");
             System.out.println(" Q/q\t   Quit");
             System.out.println();
+            System.out.println("________________________________________________\n");
 
             System.out.print("Enter a choice: ");
             char choice;
@@ -45,17 +44,17 @@ public class Queue {
                     }
                     
                     char dequeued = dequeue();
-                    System.out.println("Dequeued letter: " + dequeued);
+                    System.out.println("Dequeued character: " + dequeued);
                     break;
 
                 case 'e':
-                    System.out.print("Enter a letter: ");
+                    System.out.print("Enter a character: ");
                     char letter;
 
                     try {
                         letter = input.readLine().charAt(0);
                     } catch(IndexOutOfBoundsException ioobe) {
-                        System.out.println("Invalid input. Try again.");
+                        System.out.println("\nInvalid Input. Are you sleepy?");
                         break;
                     }
                     enqueue(letter);
@@ -63,17 +62,21 @@ public class Queue {
 
                 case 'q':
                     running = false;
+                    
+                    	System.out.println("\n________________________________________________\n");
+                    	System.out.println("\nThank you for using our program\n");
+                    
                     break;
                 
                 default:
-                    System.out.println("Invalid input. Try again.");
+                    System.out.println("\nInvalid Input. Are you sleepy?");
             }
             
         }
     }
 
     public static void printQueue() {
-        System.out.print("Queue: {");
+        System.out.print("\nQueue: {");
         for (int i = 0; i < queue.length; i++) {
             System.out.print(queue[i] + (i == queue.length-1 ? "}\n" : ", "));
         }
