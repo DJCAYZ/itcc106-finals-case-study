@@ -7,12 +7,25 @@ public class Lotto {
         final int NUMBER_COUNT = 6;
         final int NUMBER_MIN   = 1;
         final int NUMBER_MAX   = 42;
-        final int DELAY_PRINT = 1000;
+        final int DELAY_PRINT = 10;
 
+        System.out.println("=============================");
         System.out.println("Welcome to Lotto " + NUMBER_COUNT + "/" + NUMBER_MAX);
+        System.out.println("=============================\n");
 
         int[] userNums = getUserNumbers(NUMBER_COUNT, NUMBER_MIN, NUMBER_MAX);
-        int[] winningNums = generateWinningNumbers(NUMBER_COUNT, NUMBER_MAX, DELAY_PRINT);
+        int[] winningNums = generateWinningNumbers(NUMBER_COUNT, NUMBER_MAX);
+        // int[] winningNums = {21, 33, 6, 10, 12, 41};
+
+        System.out.println("The winning numbers are: ");
+        for (int i = 0; i < winningNums.length; i++) {
+            try {
+                Thread.sleep(DELAY_PRINT);
+            } catch(InterruptedException ie) {
+                System.err.println("Error: Interrupted.");
+            }
+            System.out.print(winningNums[i] + (i == winningNums.length-1 ? "\n" : " "));
+        }
 
         checkWinningConditions(userNums, winningNums);
         
@@ -21,17 +34,9 @@ public class Lotto {
     public static int[] getUserNumbers(int count, int min, int max) {
         BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
 
-        if (count < 1) {
-            throw new Error("count must be greater than 0");
-        }
-
-        if (min < 1) {
-            throw new Error("min must be greater than 0");
-        }
-        
         int[] userNums = new int[count];
 
-        System.out.printf("Please enter %d numbers from %d to %d.%n", count, min, max);
+        System.out.println("Please enter " + count +  " numbers from " + min + " to " + max);
         
         for (int i = 0; i < count; i++) {
             int userNum = 0;
@@ -43,7 +48,7 @@ public class Lotto {
             } catch (NumberFormatException nfe) {
                 System.err.println("Input not valid integer.");
                 i--;
-                continue; // starts a new iteration of the loop
+                continue;
 
             } catch (IOException ie) {
                 System.err.println("Error: IO Exception.");
@@ -52,36 +57,32 @@ public class Lotto {
             }          
             
             if (userNum < min || userNum > max) {
-                System.out.printf("Enter a number from %d to %d.%n", min, max);
+                System.out.println("Enter a number from " + min + " to " + max);
                 i--;
                 continue;
             }
             
             if (contains(userNums, userNum)) {
-                System.out.printf("You already entered %d.%n", userNum);
+                System.out.println("You already entered " + userNum);
                 i--;
                 continue;
             }
             
             userNums[i] = userNum;
-            System.out.printf("You entered: %d%n", userNum);
             
 
         }
 
-        System.out.print("Your numbers are: [");
+        System.out.print("\nYour numbers are: [");
         for (int i = 0; i < userNums.length; i++) {
-            System.out.print(userNums[i] + (i+1 == userNums.length ? "]" : ","));
+            System.out.print(userNums[i] + (i+1 == userNums.length ? "]\n\n" : ","));
         }
-        System.out.println();
 
         return userNums;
     }
 
-    public static int[] generateWinningNumbers(int count, int max, int delayPrint) {
+    public static int[] generateWinningNumbers(int count, int max) {
         int[] winningNums = new int[count];
-
-        System.out.println("The winning numbers are:");
 
         for (int i = 0; i < count; i++) {
             int winningNum =  (int) ((Math.random() * max) + 1);
@@ -90,17 +91,8 @@ public class Lotto {
                 i--;
                 continue;
             }
-
-            System.out.print(winningNum + " ");
-
-            try {
-                Thread.sleep(delayPrint);
-            } catch (InterruptedException ie) {
-                System.err.println("Thread interrupted.");
-            }
+            winningNums[i] = winningNum;
         }
-
-        System.out.println();
 
         return winningNums;
     }
@@ -113,30 +105,28 @@ public class Lotto {
             }
         }
 
-        System.out.printf("Your chosen numbers matched %d of the winning numbers.%n", matchingNums);
+        System.out.println("\nYour chosen numbers matched " + matchingNums + " of the winning numbers.\n");
 
         switch (matchingNums) {
-            case 0:
-            case 1:
-            case 2:
-                System.out.println("Unfortunately, you won nothing.");
-                System.out.println("Better luck next time!");
-                break;
-
             case 3:
-                System.out.println("Congratulations! You won two hundred (200) pesos!");
-                break;
-
+            System.out.println("Congratulations! You won 200 pesos!");
+            break;
+            
             case 4:
-                System.out.println("Congratulations! You won one thousand (1,000) pesos!");
-                break;
+            System.out.println("Congratulations! You won 1,000 pesos!");
+            break;
             
             case 5:
-                System.out.println("Congratulations! You won twenty five thousand (25,000) pesos!");
-                break;
-
+            System.out.println("Congratulations! You won 25,000 pesos!");
+            break;
+            
             case 6:
-                System.out.println("Congratulations! You won the grand prize of nine million (9,000,000) pesos!");
+            System.out.println("Congratulations! You won the grand prize of 9,000,000 pesos!");
+            break;
+
+            default:
+                System.out.println("Unfortunately, you won nothing.");
+                System.out.println("Better luck next time!\n");
                 break;
         }
     }
