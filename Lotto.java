@@ -7,7 +7,7 @@ public class Lotto {
         final int NUMBER_COUNT = 6;
         final int NUMBER_MIN   = 1;
         final int NUMBER_MAX   = 42;
-        final int DELAY_PRINT = 10;
+        final int DELAY_PRINT = 1000;
 
         System.out.println("=============================");
         System.out.println("Welcome to Lotto " + NUMBER_COUNT + "/" + NUMBER_MAX);
