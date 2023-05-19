@@ -67,6 +67,7 @@ public class Arrays {
                     break;
 
                 case 'q':
+                    System.out.println("\nThank you for using our program, Have a nice day!\n");
                     running = false;
                     break;
 
